@@ -101,21 +101,8 @@ sub _get_config
          server_name => $self->server_name,
          private_key => $self->{paths}{matrix_key},
 
-         kafka => {
-            use_naffka => $JSON::true,
-            naffka_database => {
-               connection_string => 
-                   ( ! defined $ENV{'POSTGRES'} || $ENV{'POSTGRES'} == '0') ?
-                   "file:$self->{hs_dir}/naffka.db" : $db_uri,
-            },
-            topics => {
-               output_room_event  => 'roomserverOutput',
-               output_client_data => 'clientapiOutput',
-               user_updates => 'userUpdates',
-               output_typing_event => 'eduServerTypingOutput',
-               output_send_to_device_event => 'eduServerSendToDeviceOutput',
-               output_key_change_event => 'output_key_change_event',
-            },
+         jetstream => {
+             storage_path => "$self->{hs_dir}/",
          },
       },
 
