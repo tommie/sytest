@@ -135,6 +135,20 @@ sub _get_config
             recaptcha_private_key    => $self->{recaptcha_config}->{private_key},
          ) : (),
 
+         login => {
+            sso => {
+               enabled => $JSON::true,
+               providers => [{
+                  id => "github",
+                  name => "SyTest fake",
+                  oidc => {
+                     client_id => "aclientid",
+                     client_secret => "aclientsecret",
+                  },
+              }],
+            },
+         },
+
          rate_limiting => {
             enabled => $JSON::false,
          },
